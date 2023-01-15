@@ -69,7 +69,7 @@ const SemiProtectedRoute = ({ children, ...rest }) => {
               ) : (
                   <Redirect
                       to={{
-                          pathname: '/rooms',
+                          pathname: '/activate',
                           state: { from: location },
                       }}
                   />

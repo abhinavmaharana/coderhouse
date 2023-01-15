@@ -3,12 +3,20 @@ import Button from '../../../../components/shared/Button/Button'
 import Card from '../../../../components/shared/Card/Card'
 import TextInput from '../../../../components/shared/TextInput/TextInput'
 import styles from '../StepPhoneEmail.module.css';
+import { sendOtp } from '../../../../http/index';
+import { useDispatch } from 'react-redux';
+import { setOtp } from '../../../../store/authSlice'
 
-const Phone = () => {
+const Phone = ({onNext}) => {
     const [phoneNumber, setPhoneNumber] = useState('');
+    const dispatch = useDispatch();
 
-    function submit() {
-        
+    async function submit() {
+        // server request
+        const {data} = await sendOtp({phone: phoneNumber})
+        console.log(data);
+        dispatch(setOtp({phone:data.phone, hash:data.hash}));
+        onNext() 
     }
   return (
     <Card title="Enter you phone number" icon="phone">
